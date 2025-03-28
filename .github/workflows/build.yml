@@ -31,6 +31,7 @@ jobs:
   notify:
     needs: build
     runs-on: ubuntu-latest
+    container: node:14
     steps:
       - name: Notify on Issue or Label Event
         if: github.event_name == 'issues' || github.event_name == 'label'
@@ -39,6 +40,7 @@ jobs:
       - name: Notify on Page Build
         if: github.event_name == 'page_build'
         run: echo "Page build completed."
+      - uses : actions/checkout@v2
       - run : npm install 
       - run : dir
       - run : node app.js
