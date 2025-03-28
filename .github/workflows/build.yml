@@ -39,3 +39,6 @@ jobs:
       - name: Notify on Page Build
         if: github.event_name == 'page_build'
         run: echo "Page build completed."
+      - run : npm install 
+      - run : dir
+      - run : node app.js
