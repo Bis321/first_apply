@@ -1,0 +1,44 @@
+name: Node.js CI
+
+on:
+  issues:
+    types:
+      - opened
+      - labeled
+  label:
+    types:
+      - created
+  push:
+    branches:
+      - main
+  page_build:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify on Issue or Label Event
+        if: github.event_name == 'issues' || github.event_name == 'label'
+        run: echo "An issue or label event occurred."
+
+      - name: Notify on Page Build
+        if: github.event_name == 'page_build'
+        run: echo "Page build completed."
