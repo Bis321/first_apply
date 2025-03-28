@@ -42,7 +42,9 @@ jobs:
         run: echo "Page build completed."
       - uses : actions/checkout@v2
       - run : npm install 
-      - run : dir
-      - name: Start Server (Auto-Stop)
-        run: timeout 30s node server.js
-      - run : node app.js
+      - name: Start Server (Runs in Background)
+        run: node server.js &
+      - name: Run Tests
+        run: npm test
+      - name: Stop Server (If Still Running)
+        run: pkill -f "node server.js" || true
