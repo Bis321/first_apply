@@ -43,4 +43,6 @@ jobs:
       - uses : actions/checkout@v2
       - run : npm install 
       - run : dir
+      - name: Start Server (Auto-Stop)
+        run: timeout 30s node server.js
       - run : node app.js
