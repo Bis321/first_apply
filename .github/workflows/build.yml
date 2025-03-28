@@ -5,14 +5,12 @@ on:
     types:
       - opened
       - labeled
-  label:
-    types:
-      - created
+  
   push:
     branches:
       - main
-  page_build:
 
+      
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,7 +29,7 @@ jobs:
 
       - name: Run tests
         run: npm test
-
+        
   notify:
     needs: build
     runs-on: ubuntu-latest
